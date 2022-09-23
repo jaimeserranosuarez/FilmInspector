@@ -13,7 +13,7 @@ class TitleProvider {
 
     try {
       Map<String, String> parametros = {
-        'apiKey': 'k_lmr00sx7',
+        'apiKey': apiKey,
       };
       var response =
           await http.get(Uri.https('imdb-api.com', 'es/API/$tipo', parametros));
@@ -33,7 +33,7 @@ class TitleProvider {
     var client = http.Client();
     try {
       Map<String, String> parametros = {
-        'apiKey': 'k_lmr00sx7',
+        'apiKey': apiKey,
         'id' : id
       };
       var response =
@@ -51,7 +51,7 @@ class TitleProvider {
     var client = http.Client();
     try {
       Map<String, String> parametros = {
-        'apiKey': 'k_lmr00sx7',
+        'apiKey': apiKey,
         'id' : id
       };
       var response =
