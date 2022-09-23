@@ -18,12 +18,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TitleProvider titleProvider = TitleProvider();
   late Future<List<TitleModel>> top250Movies;
+  late Future<List<TitleModel>> top250Series;
+  late Future<List<TitleModel>> estrenos;
 
   @override
   void initState() {
-    top250Movies = titleProvider.top250Movies();
+    top250Movies = titleProvider.homeProvider(tipo: "Top250Movies");
+    top250Series = titleProvider.homeProvider(tipo: "Top250TVs");
+    estrenos = titleProvider.homeProvider(tipo: "InTheaters");
 
-    print(top250Movies);
+    List<TitleCard> topMoviesPrev = [];
     super.initState();
   }
 
@@ -37,43 +41,165 @@ class _HomePageState extends State<HomePage> {
         ),
         body: ListView(
           children: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(
-                    left: responsive.width(2),
-                    top: responsive.height(2),
-                    bottom: responsive.height(3)),
-                child: textos(context, 'Top Mejores peliculas', kTextColorPrinc,
-                    FontWeight.normal, responsive.height(2))),
-            Padding(
-              padding: EdgeInsets.only(bottom: responsive.height(2)),
-              child: Container(
-                // from: 40,
-                // delay: Duration(milliseconds: 100),
-                child: Container(
-                    height: responsive.height(80),
-                    width: responsive.width(30),
-                    child: FutureBuilder(
-                      future: top250Movies,
-                      builder: ((context, snapshot) {
-                        List<Widget> lista = [];
-                        if (snapshot.hasData) {
-                          snapshot.data
-                              ?.forEach((element) => lista.add(TitleCard(
-                                  title: element,
-                                  onTap: () {
-                                    print("detalle");
-                                  })));
-                          return ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: lista,
-                          );
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: textos(context, 'En cines ahora', kTextColorPrinc,
+                        FontWeight.w500, responsive.height(2.3))),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        right: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Listado");
+                      },
+                      child: textos(context, 'Ver más', kTextColorPrinc,
+                          FontWeight.w400, responsive.height(1.7)),
                     )),
-              ),
-            )
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: responsive.height(2),
+                  left: responsive.width(2),
+                  right: responsive.width(2)),
+              child: SizedBox(
+                  // width: responsive.width(30),
+                  height: responsive.height(34),
+                  child: FutureBuilder(
+                    future: estrenos,
+                    builder: ((context, snapshot) {
+                      List<Widget> lista = [];
+                      if (snapshot.hasData) {
+                        snapshot.data?.take(5).forEach((element) => lista.add(TitleCard(
+                            title: element,
+                            onTap: () {
+                              print("detalle");
+                            })));
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: lista,
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
+                  )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: textos(context, 'Top Mejores películas', kTextColorPrinc,
+                        FontWeight.w500, responsive.height(2.3))),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        right: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Listado");
+                      },
+                      child: textos(context, 'Ver más', kTextColorPrinc,
+                          FontWeight.w400, responsive.height(1.7)),
+                    )),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: responsive.height(2),
+                  left: responsive.width(2),
+                  right: responsive.width(2)),
+              child: SizedBox(
+                  // width: responsive.width(30),
+                  height: responsive.height(34),
+                  child: FutureBuilder(
+                    future: top250Movies,
+                    builder: ((context, snapshot) {
+                      List<Widget> lista = [];
+                      if (snapshot.hasData) {
+                        snapshot.data?.take(10).forEach((element) => lista.add(TitleCard(
+                            title: element,
+                            onTap: () {
+                              print("detalle");
+                            })));
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: lista,
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
+                  )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: textos(context, 'Top Mejores series', kTextColorPrinc,
+                        FontWeight.w500, responsive.height(2.3))),
+                Padding(
+                    padding: EdgeInsets.only(
+                        left: responsive.width(4),
+                        right: responsive.width(4),
+                        top: responsive.height(3),
+                        bottom: responsive.height(2)),
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Listado");
+                      },
+                      child: textos(context, 'Ver más', kTextColorPrinc,
+                          FontWeight.w400, responsive.height(1.7)),
+                    )),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: responsive.height(2),
+                  left: responsive.width(2),
+                  right: responsive.width(2)),
+              child: SizedBox(
+                  // width: responsive.width(30),
+                  height: responsive.height(34),
+                  child: FutureBuilder(
+                    future: top250Series,
+                    builder: ((context, snapshot) {
+                      List<Widget> lista = [];
+                      if (snapshot.hasData) {
+                        snapshot.data?.take(10).forEach((element) => lista.add(TitleCard(
+                            title: element,
+                            onTap: () {
+                              print("detalle");
+                            })));
+                        return ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: lista,
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
+                  )),
+            ),
           ],
         ));
   }

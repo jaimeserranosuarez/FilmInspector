@@ -16,47 +16,41 @@ class TitleCard extends StatelessWidget {
     Responsive responsive = new Responsive(context);
 
     return Padding(
-      padding:EdgeInsets.only(left: responsive.width(3.64)),
-          //EdgeInsets.only(left: responsive.width(3.64), right: responsive.width(3.64)),
+      padding:EdgeInsets.only(
+        left: responsive.width(1),
+        right: responsive.width(1)),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          width: responsive.width(30),
-          // height: responsive.height(29.95),
+          width: responsive.width(38),
+          height: responsive.height(34),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: CachedNetworkImage(
-                  // height: responsive.height(18.09),
-                  width: responsive.width(30),
+                  width: responsive.width(38),
+                  height: responsive.height(30),
                   fit: BoxFit.cover,
                   imageUrl: title.image,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: responsive.height(1.19)),
-                child: Text(
-                  title.title,
-                  style: TextStyle(
-                      fontFamily: "Poppins",
-                      color: kTextColorPrinc,
-                      fontWeight: FontWeight.bold,
-                      fontSize: responsive.height(1.8)),
-                ),
-              ),
               Container(
-                width: responsive.width(49.5),
-                height: responsive.height(2.92),
-                child: Text(
-                  title.plotLocal,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontFamily: "Poppins",
-                      color: kTextColorPrinc,
-                      fontWeight: FontWeight.w200,
-                      fontSize: responsive.height(1.7)),
+                height: responsive.height(3.4),
+                padding: EdgeInsets.only(top: responsive.height(1)),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Text(
+                    title.title,
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        color: kTextColorPrinc,
+                        fontWeight: FontWeight.bold,
+                        fontSize: responsive.height(1.7)),
+                  ),
+                  ],
                 ),
               ),
             ],

@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import '../constants/constants.dart';
 
 class TitleProvider {
-  Future<List<TitleModel>> top250Movies() async {
+
+  Future<List<TitleModel>> homeProvider({required String tipo}) async {
     List<TitleModel> titles = [];
     var client = http.Client();
 
@@ -15,7 +16,7 @@ class TitleProvider {
         'apiKey': 'k_2iryvmt6',
       };
       var response =
-          await http.get(Uri.https('imdb-api.com', 'API/Top250Movies', parametros));
+          await http.get(Uri.https('imdb-api.com', 'es/API/$tipo', parametros));
 
       var decodedResponse =
           jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
