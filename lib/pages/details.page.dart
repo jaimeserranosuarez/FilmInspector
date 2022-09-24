@@ -195,14 +195,14 @@ class _DetailsPageState extends State<DetailsPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [   
-                                  // ClipRRect(
-                                  //   borderRadius: BorderRadius.circular(5.0),
-                                  //   child:
-                                  // YoutubePlayer(
-                                  //     controller: _controller,
-                                  //     showVideoProgressIndicator: true,
-                                  // )
-                                  // ),                                                                                        
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    child:
+                                  YoutubePlayer(
+                                      controller: _controller,
+                                      showVideoProgressIndicator: true,
+                                  )
+                                  ),                                                                                        
                                 ],
                               ),
                               decoration: BoxDecoration(

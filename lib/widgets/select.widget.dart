@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SelectDown extends StatefulWidget {
-  SelectDown({super.key, required this.listaOpciones});
+  SelectDown({super.key, required this.listaOpciones, required this.callBackOnchange});
   List<String> listaOpciones;
-
+  dynamic callBackOnchange;
 
   @override
   State<SelectDown> createState() => _SelectDownState();
@@ -12,6 +12,7 @@ class SelectDown extends StatefulWidget {
 class _SelectDownState extends State<SelectDown> {
  
  String dropdownValue='';
+
 
 @override
   void initState() {
@@ -25,17 +26,18 @@ class _SelectDownState extends State<SelectDown> {
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
+      elevation: 20,
+      style: const TextStyle(color: Colors.white, fontSize: 20),
+      underline: SizedBox(),
+      // underline: Container(
+      //   height: 3,
+      //   color: Colors.white,
+      // ),
+      onChanged: (String? value) {  
+         setState(() {
           dropdownValue = value!;
         });
+        widget.callBackOnchange(value);  
       },
       items: widget.listaOpciones.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
