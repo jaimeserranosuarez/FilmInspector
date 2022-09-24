@@ -45,4 +45,3 @@ app.*.map.json
 
 macos/
 
-lib/constants/constants.dart
