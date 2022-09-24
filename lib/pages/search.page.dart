@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/select.widget.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
@@ -9,6 +11,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
 late TextEditingController _controller;
+List<String> opciones = ["azul","rojo"];
 
  @override
   void initState() {
@@ -25,6 +28,7 @@ late TextEditingController _controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar( title: const Text("Detalles de Busqueda"),),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -41,24 +45,28 @@ late TextEditingController _controller;
                       child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                       Text("Busqueda"),
-                       Center(
-                        //   child: TextField(
-                        //   controller: _controller,
-                        //   obscureText: true,
-                        //   textAlign: TextAlign.left,
-                        //   decoration: InputDecoration(
-                        //     border: InputBorder.none,
-                        //     hintText: 'PLEASE ENTER YOUR EMAIL',
-                        //     hintStyle: TextStyle(color: Colors.grey),
-                        //   ),
-                        // )
-                       )
+                        
+                       
+                       Padding(
+                         padding: const EdgeInsets.all(20),
+                         child: Center(
+                            child: TextField(
+                            controller: _controller,                              
+                            textAlign: TextAlign.left,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Escribe el nombre la pelicula',
+                              hintStyle: TextStyle(color: Color.fromARGB(255, 245, 245, 245)),
+                            ),
+                          )
+                         ),
+                       ),
+                       SelectDown(listaOpciones: opciones),
                       ],
                     ),
                     decoration: BoxDecoration(
                                   
-                                    color: Color.fromRGBO(29, 30,51, 1),
+                                    //color: Color.fromARGB(255, 233, 233, 243),
                                     borderRadius: BorderRadius.circular(20)
                                 ),  
                   )
