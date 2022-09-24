@@ -26,8 +26,8 @@ class _SelectDownState extends State<SelectDown> {
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
-      elevation: 20,
-      style: const TextStyle(color: Colors.white, fontSize: 20),
+      elevation: 10,
+      style: const TextStyle(color: Colors.white, fontSize: 25,fontWeight: FontWeight.bold),
       underline: SizedBox(),
       // underline: Container(
       //   height: 3,
