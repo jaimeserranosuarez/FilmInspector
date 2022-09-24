@@ -21,7 +21,7 @@ class _TitleListItem extends State<TitleListItem> {
     String firstLabel = '';
     final TitleProvider titleProvider = TitleProvider();
     String trailer = '';
-    String plotLocal = '';
+    TitleModel titleResult = TitleModel.emptyTitle();
     if (widget.title.rank != '') {
       firstLabel = "Top: " + widget.title.rank;
     } else {
@@ -37,17 +37,16 @@ class _TitleListItem extends State<TitleListItem> {
         customBorder:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(11.0)),
         onTap: () async {
-          if (trailer == '' && plotLocal == '') {
+          if (trailer == '') {
             trailer = await titleProvider.trailerMovie(widget.title.id);
-            plotLocal = await titleProvider.plotMovie(widget.title.id);
+            titleResult = await titleProvider.movieById(widget.title.id);
           }
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: ((context) => DetailsPage(
-                      title: widget.title,
-                      trailer: trailer,
-                      plotLocal: plotLocal))));
+                      title: titleResult,
+                      trailer: trailer))));
         },
         child: Container(
             width: responsive.width(20),

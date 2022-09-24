@@ -38,6 +38,8 @@ class TitleModel{
 
   });
 
+  TitleModel.emptyTitle({this.rank = "", this.id = "", this.title = "", this.originalTitle = "", this.fullTitle = "", this.image = "", this.type = "", this.year = "", this.releaseDate = "", this.runtimeStr = "", this.plot = "", this.plotLocal = "", this.awards = "", this.directors = "", this.genres = "", this.imDbRating = ""});
+
   factory TitleModel.fromJson(Map<String, dynamic> json) => TitleModel(
       rank: json['rank'] ?? '',
       id: json['id'] ?? '',

@@ -38,26 +38,29 @@ class TitleProvider {
       var response =
           await http.get(Uri.https('imdb-api.com', 'API/YouTubeTrailer', parametros));
       var decodedResponse =jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
-      videoURl = decodedResponse['videoUrl'];
+      videoURl = decodedResponse['videoUrl']?? 'https://www.youtube.com/watch?v=ts8i-6AtDfc';
       return videoURl;
     } finally {
       client.close();
     }
   }
 
-   Future<String> plotMovie(String id) async {
-    String plotLocal = '';
+   Future<TitleModel> movieById(String id) async {
+    TitleModel title;
     var client = http.Client();
     try {
       Map<String, String> parametros = {
         'apiKey': apiKey,
         'id' : id
       };
+      print(Uri.https('imdb-api.com', 'es/API/Title', parametros));
       var response =
           await http.get(Uri.https('imdb-api.com', 'es/API/Title', parametros));
+      print(response);
       var decodedResponse =jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
-      plotLocal = decodedResponse['plotLocal'];
-      return plotLocal;
+      print(decodedResponse);
+      title = TitleModel.fromJson(decodedResponse);
+      return title;
     } finally {
       client.close();
     }
@@ -73,11 +76,12 @@ class TitleProvider {
         'title_type': type,
         'genres': genre
       };
+      print(Uri.https('imdb-api.com', 'es/API/AdvancedSearch', parametros));
       var response =
           await http.get(Uri.https('imdb-api.com', 'es/API/AdvancedSearch', parametros));
       var decodedResponse =
           jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
-      decodedResponse['items']
+      decodedResponse['results']
           .forEach((item) => titles.add(TitleModel.fromJson(item)));
       return titles;
     } finally {

@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 
 import '../models/genres.model.dart';
+import '../models/title.model.dart';
+import '../providers/titles.provider.dart';
 import '../widgets/select.widget.dart';
+import 'listTitles.page.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -13,18 +16,15 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-late TextEditingController _controller;
- Map<String,String> opcionesTipoMap = {
-  "Pelicula": "feature",
-  "TV pelicula":"tv_movie",
-  "Serie":"tv_series"
+  late TextEditingController _controller;
+
+  final TitleProvider titleProvider = TitleProvider();
+  late Future<List<TitleModel>> resultadoBusqueda;
+  Map<String, String> opcionesTipoMap = {
+    "Pelicula": "feature",
+    "TV pelicula": "tv_movie",
+    "Serie": "tv_series"
   };
-  
-List<String> opcionesTipo = [
-  "Pelicula",
-  "TV pelicula",
-  "Serie"
-];
 
  Map<String,String> opcionesClasificacionMap = { 
   "Todas las Edades": "us:G",
@@ -71,35 +71,63 @@ Map<String,String> opcionesGeneroMap = {
   "Viejo Oeste":"western" 
 };
 
-List<String> opcionesGenero = [
-  "Acción",
-  "Aventura",
-  "Animación",
-  "Biografico",
-  "Comedia",
-  "Crimen",
-  "Documental",
-  "Drama",
-  "Familiar",
-  "Fantasia",
-  "Cine Negro",
-  "Game Show",
-  "Historia",
-  "Horror",
-  "Musica",
-  "Musical",  
-  "Misterio",
-  "Noticias",
-  "Reality Show",
-  "Romance",
-  "Ciencia Ficcion",
-  "Deportes",
-  "Talk Show",
-  "Suspenso",
-  "Guerra",
-  "Viejo Oeste" 
-];
+  Map<String, String> opcionesGeneroMap = {
+    "Acción": "action",
+    "Aventura": "adventure",
+    "Animación": "animation",
+    "Biografico": "biography",
+    "Comedia": "comedy",
+    "Crimen": "crime",
+    "Documental": "documentary",
+    "Drama": "drama",
+    "Familiar": "family",
+    "Fantasia": "fantasy",
+    "Cine Negro": "film_noir",
+    "Game Show": "game_show",
+    "Historia": "history",
+    "Horror": "horror",
+    "Musica": "music",
+    "Musical": "musical",
+    "Misterio": "mystery",
+    "Noticias": "news",
+    "Reality Show": "reality_tv",
+    "Romance": "romance",
+    "Ciencia Ficcion": "sci_fi",
+    "Deportes": "sport",
+    "Talk Show": "talk_show",
+    "Suspenso": "thriller",
+    "Guerra": "war",
+    "Viejo Oeste": "western"
+  };
 
+  List<String> opcionesGenero = [
+    "Acción",
+    "Aventura",
+    "Animación",
+    "Biografico",
+    "Comedia",
+    "Crimen",
+    "Documental",
+    "Drama",
+    "Familiar",
+    "Fantasia",
+    "Cine Negro",
+    "Game Show",
+    "Historia",
+    "Horror",
+    "Musica",
+    "Musical",
+    "Misterio",
+    "Noticias",
+    "Reality Show",
+    "Romance",
+    "Ciencia Ficcion",
+    "Deportes",
+    "Talk Show",
+    "Suspenso",
+    "Guerra",
+    "Viejo Oeste"
+  ];
 
 String textFieldvalue = 'Pelicula Predefinida';
 String? dropDownValueType;
@@ -133,15 +161,14 @@ String? dropDownValueCertificade;
           Expanded(
             flex: 2,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: 
-                    Container (
-                      // ignore: sort_child_properties_last
-                      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    // ignore: sort_child_properties_last
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [                     
                        

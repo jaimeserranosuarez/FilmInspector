@@ -5,10 +5,10 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/title.model.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key, required this.title, required this.trailer, required this.plotLocal});
+  const DetailsPage({super.key, required this.title, required this.trailer});
   final TitleModel title;
   final String trailer;
-  final String plotLocal;
+  // final String plotLocal;
   
 
   @override
@@ -63,7 +63,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                     // height: responsive.height(18.09),
                                     width: responsive.width(40),
                                     fit: BoxFit.cover,
-                                    imageUrl: widget.title.image,
+                                    imageUrl: (widget.title.image == '' ? 'https://media.comicbook.com/files/img/default-movie.png': widget.title.image),
+                                    
                                   ),
                                 ),
                               ],
@@ -158,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     scrollDirection: Axis.vertical,
                                     children: [
                                       Text(
-                                      "${widget.plotLocal}",
+                                      widget.title.plotLocal,
                                       style: TextStyle(
                                           fontFamily: "Poppins",                                          
                                           fontWeight: FontWeight.bold,

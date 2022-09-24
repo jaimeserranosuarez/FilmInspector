@@ -9,30 +9,29 @@ import '../providers/titles.provider.dart';
 
 class TitleCard extends StatelessWidget {
   final TitleModel title;
-  final VoidCallback onTap;
 
-  const TitleCard({super.key, required this.title, required this.onTap});
+  const TitleCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     Responsive responsive = new Responsive(context);
     final TitleProvider titleProvider = TitleProvider();
     String trailer = '';
-    String plotLocal = '';
+    TitleModel titleResult = TitleModel.emptyTitle();
     return Padding(
       padding: EdgeInsets.only(
           left: responsive.width(1), right: responsive.width(1)),
       child: GestureDetector(
         onTap: ()async{
-          if (trailer == '' && plotLocal == '') {
+          if (trailer == '') {
             trailer = await titleProvider.trailerMovie(title.id);
-            plotLocal = await titleProvider.plotMovie(title.id);
+            titleResult = await titleProvider.movieById(title.id);
           }
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: ((context) => DetailsPage(
-                      title: title, trailer: trailer, plotLocal: plotLocal))));
+                      title: titleResult, trailer: trailer))));
         },
         child: Container(
           width: responsive.width(38),
