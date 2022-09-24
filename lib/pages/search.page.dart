@@ -26,6 +26,12 @@ class _SearchPageState extends State<SearchPage> {
     "Serie": "tv_series"
   };
 
+  List<String> opcionesTipo = [
+    "Pelicula",
+    "TV pelicula",
+    "Serie"
+  ];
+
  Map<String,String> opcionesClasificacionMap = { 
   "Todas las Edades": "us:G",
   "Contenido no acto para niños":"us:PG",
@@ -41,35 +47,6 @@ List<String> opcionesClasificacion = [
   "M17 - compañia de un adulto",
   "Mayores de 17 años"
 ];
-
-Map<String,String> opcionesGeneroMap = {
-  "Acción":"action",
-  "Aventura":"adventure",
-  "Animación":"animation",
-  "Biografico":"biography",
-  "Comedia":"comedy",
-  "Crimen":"crime",
-  "Documental":"documentary",
-  "Drama":"drama",
-  "Familiar":"family",
-  "Fantasia":"fantasy",
-  "Cine Negro":"film_noir",
-  "Game Show":"game_show",
-  "Historia":"history",
-  "Horror":"horror",
-  "Musica":"music",
-  "Musical":"musical",  
-  "Misterio":"mystery",
-  "Noticias":"news",
-  "Reality Show":"reality_tv",
-  "Romance":"romance",
-  "Ciencia Ficcion":"sci_fi",
-  "Deportes":"sport",
-  "Talk Show":"talk_show",
-  "Suspenso":"thriller",
-  "Guerra":"war",
-  "Viejo Oeste":"western" 
-};
 
   Map<String, String> opcionesGeneroMap = {
     "Acción": "action",
