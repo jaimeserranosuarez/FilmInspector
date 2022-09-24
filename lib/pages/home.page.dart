@@ -1,3 +1,4 @@
+import 'package:film_inspector/pages/listTitles.page.dart';
 import 'package:film_inspector/pages/search.page.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                         bottom: responsive.height(2)),
                     child: GestureDetector(
                       onTap: () {
-                        print("Listado");
+                        Navigator.push(context,MaterialPageRoute(
+                        builder: (context) => ListTitles(titulos: estrenos, pagina: 'En cines ahora',)));
                       },
                       child: textos(context, 'Ver más', kTextColorPrinc,
                           FontWeight.w400, responsive.height(1.7)),
@@ -121,7 +123,8 @@ class _HomePageState extends State<HomePage> {
                         bottom: responsive.height(2)),
                     child: GestureDetector(
                       onTap: () {
-                        print("Listado");
+                        Navigator.push(context,MaterialPageRoute(
+                        builder: (context) => ListTitles(titulos: top250Movies, pagina: 'Top mejores 250 películas',)));
                       },
                       child: textos(context, 'Ver más', kTextColorPrinc,
                           FontWeight.w400, responsive.height(1.7)),
@@ -174,7 +177,8 @@ class _HomePageState extends State<HomePage> {
                         bottom: responsive.height(2)),
                     child: GestureDetector(
                       onTap: () {
-                        print("Listado");
+                        Navigator.push(context,MaterialPageRoute(
+                        builder: (context) => ListTitles(titulos: top250Series, pagina: 'Top Mejores series',)));
                       },
                       child: textos(context, 'Ver más', kTextColorPrinc,
                           FontWeight.w400, responsive.height(1.7)),

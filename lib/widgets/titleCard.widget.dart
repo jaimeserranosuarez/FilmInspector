@@ -11,26 +11,28 @@ class TitleCard extends StatelessWidget {
   final TitleModel title;
   final VoidCallback onTap;
 
-  
-
-  const TitleCard({required this.title, required this.onTap});
+  const TitleCard({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     Responsive responsive = new Responsive(context);
-
+    final TitleProvider titleProvider = TitleProvider();
+    String trailer = '';
+    String plotLocal = '';
     return Padding(
-      padding:EdgeInsets.only(
-        left: responsive.width(1),
-        right: responsive.width(1)),
+      padding: EdgeInsets.only(
+          left: responsive.width(1), right: responsive.width(1)),
       child: GestureDetector(
-        onTap: () async{
-          final TitleProvider titleProvider = TitleProvider();
-          late String trailer;
-          trailer = await titleProvider.trailerMovie(title.id); 
-          late String plotLocal;
-          plotLocal = await titleProvider.plotMovie(title.id);
-          Navigator.push(context, MaterialPageRoute(builder: ((context) => DetailsPage(title: title,trailer: trailer,plotLocal: plotLocal))));
+        onTap: ()async{
+          if (trailer == '' && plotLocal == '') {
+            trailer = await titleProvider.trailerMovie(title.id);
+            plotLocal = await titleProvider.plotMovie(title.id);
+          }
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => DetailsPage(
+                      title: title, trailer: trailer, plotLocal: plotLocal))));
         },
         child: Container(
           width: responsive.width(38),
@@ -54,13 +56,13 @@ class TitleCard extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     Text(
-                    title.title,
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        color: kTextColorPrinc,
-                        fontWeight: FontWeight.bold,
-                        fontSize: responsive.height(1.7)),
-                  ),
+                      title.title,
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          color: kTextColorPrinc,
+                          fontWeight: FontWeight.bold,
+                          fontSize: responsive.height(1.7)),
+                    ),
                   ],
                 ),
               ),
