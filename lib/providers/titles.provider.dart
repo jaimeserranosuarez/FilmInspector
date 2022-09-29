@@ -66,7 +66,7 @@ class TitleProvider {
     }
   }
 
-  Future<List<TitleModel>> searchProvider({required String title, required String type, required String genre}) async {
+  Future<List<TitleModel>> searchProvider({required String title, required String type, required String genre, required String certificates}) async {
     List<TitleModel> titles = [];
     var client = http.Client();
     try {
@@ -74,7 +74,8 @@ class TitleProvider {
         'apiKey': apiKey,
         'title': title,
         'title_type': type,
-        'genres': genre
+        'genres': genre,
+        'certificates': certificates
       };
       print(Uri.https('imdb-api.com', 'es/API/AdvancedSearch', parametros));
       var response =
